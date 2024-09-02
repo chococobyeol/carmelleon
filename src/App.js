@@ -7,7 +7,7 @@ import About from './pages/About';
 import Support from './pages/Support';
 import Cart from './pages/Cart';
 import Orders from './pages/Orders';
-import Register from './pages/Register';
+import Register from './pages/Register'; // Register 페이지 import
 import Login from './pages/Login';
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
         <Route path="/support" element={<Support />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/orders" element={<Orders />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Register />} /> {/* Register 페이지 라우트 추가 */}
         <Route path="/login" element={<Login />} />
       </Routes>
     </Router>

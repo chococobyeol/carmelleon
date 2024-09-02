@@ -2,42 +2,34 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const loginUser = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/auth/login', { email, password });
-      console.log('User logged in:', response.data);
-      // 로그인 성공 시, 필요한 동작 (예: 리다이렉트)
-      // 예: window.location.href = "/dashboard";
+      const response = await axios.post('/auth/login', { username, password });
+      console.log('로그인 성공:', response.data);
     } catch (error) {
-      console.error('Error logging in user:', error.response?.data?.message || 'Unknown error');
+      console.error('로그인 실패:', error.response.data);
     }
   };
 
   return (
-    <form onSubmit={loginUser}>
-      <div>
-        <label>Email</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit">Login</button>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Username"
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+      <button type="submit">Log In</button>
     </form>
   );
 };

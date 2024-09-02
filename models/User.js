@@ -1,31 +1,25 @@
+// models/User.js
 const { Sequelize, DataTypes } = require('sequelize');
-const bcrypt = require('bcryptjs');
-const sequelize = new Sequelize(process.env.DATABASE_URL);
+const sequelize = require('../db'); // db.js에서 정의한 sequelize 인스턴스를 가져옵니다.
 
 const User = sequelize.define('User', {
-  username: {
+  googleId: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
+  },
+  username: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
   },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  }
+}, {
+  // 옵션들 (필요에 따라 정의)
+  timestamps: true,
 });
-
-User.beforeCreate(async (user) => {
-  const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(user.password, salt);
-});
-
-User.prototype.matchPassword = async function(enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
-};
 
 module.exports = User;
