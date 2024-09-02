@@ -18,6 +18,10 @@
 .env.test.local
 .env.production.local
 
+# 환경 변수 파일 무시
+.env
+
+# 로그 파일 무시
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
