@@ -1,26 +1,19 @@
 const express = require('express');
-   const passport = require('passport');
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
-   const router = express.Router();
+const router = express.Router();
 
-   // Google OAuth 로그인 라우트
-   router.get('/google', (req, res, next) => {
-     console.log('Google OAuth route hit');
-     passport.authenticate('google', {
-       scope: ['profile', 'email'],
-     })(req, res, next);
-   });
+router.get('/google', passport.authenticate('google', {
+  scope: ['profile', 'email'],
+}));
 
-   // Google OAuth 로그인 콜백 라우트
-   router.get('/google/callback', 
-     (req, res, next) => {
-       console.log('Google OAuth callback route hit');
-       passport.authenticate('google', { failureRedirect: '/' })(req, res, next);
-     },
-     (req, res) => {
-       console.log('Google OAuth authentication successful');
-       res.redirect('/');
-     }
-   );
+router.get('/google/callback', 
+  passport.authenticate('google', { failureRedirect: 'http://localhost:3002/login' }),
+  (req, res) => {
+    const token = jwt.sign({ id: req.user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.redirect(`http://localhost:3002?token=${token}`);
+  }
+);
 
-   module.exports = router;
+module.exports = router;

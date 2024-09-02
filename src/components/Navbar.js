@@ -2,24 +2,35 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
-const Navbar = () => {
-    // 로그인 버튼 클릭 시 Google OAuth로 리디렉션
-    const handleLogin = () => {
-        console.log("Login button clicked");
-        window.location.href = "http://localhost:3001/auth/google"; 
+const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
+  const handleLogin = () => {
+    console.log("Login button clicked");
+    window.location.href = "http://localhost:3001/auth/google";  
     };
 
-    // 회원가입 버튼 클릭 시 Google OAuth로 리디렉션
-    const handleSignUp = () => {
-        console.log("Sign Up button clicked");
-        window.location.href = "http://localhost:3001/auth/google"; 
+  const handleSignUp = () => {
+    console.log("Sign Up button clicked");
+    window.location.href = "http://localhost:3001/auth/google"; 
+    };
+  const handleLogout = () => {
+        console.log("Logout button clicked");
+        localStorage.removeItem('userToken');
+        setIsLoggedIn(false);
+        // 필요하다면 백엔드에 로그아웃 요청을 보낼 수 있습니다.
+        // 예: window.location.href = "http://localhost:3001/auth/logout";
     };
 
     return (
         <header className="header">
             <div className="auth-buttons">
-                <button onClick={handleLogin}>Login</button>
-                <button onClick={handleSignUp}>Sign Up</button>
+                {isLoggedIn ? (
+                    <button onClick={handleLogout}>Logout</button>
+                ) : (
+                    <>
+                        <button onClick={handleLogin}>Login</button>
+                        <button onClick={handleSignUp}>Sign Up</button>
+                    </>
+                )}
             </div>
             <div className="logo">
                 <img src={`${process.env.PUBLIC_URL}/assets/main_icon.png`} alt="Carmelleon" className="main-icon" />
