@@ -20,7 +20,7 @@ console.log('SESSION_SECRET:', process.env.SESSION_SECRET);
 
 // CORS 설정
 app.use(cors({
-  origin: process.env.REACT_APP_FRONTEND_URL,
+  origin: process.env.REACT_APP_FRONTEND_URL.replace(/\/$/, ''), // 끝에 슬래시를 제거
   credentials: true,
 }));
 
@@ -35,6 +35,7 @@ app.use(session({
   cookie: {
     secure: process.env.NODE_ENV === 'production', // 프로덕션 환경에서는 HTTPS를 사용해야만 쿠키가 전송됨
     httpOnly: true, // 클라이언트 자바스크립트에서 쿠키 접근 불가
+    sameSite: 'None', // CORS와 함께 쿠키를 사용하려면 None으로 설정
     maxAge: 1000 * 60 * 60, // 1시간 동안 유효
   },
 }));
