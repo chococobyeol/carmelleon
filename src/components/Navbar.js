@@ -35,7 +35,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, userName, handleLogout }) => {
         )}
       </div>
       <div className="logo">
-        <img src={`${process.env.PUBLIC_URL}/assets/main_icon.png`} alt="Carmelleon" className="main-icon" />
+        <img src={`${process.env.PUBLIC_URL}/Assets/main_icon.png`} alt="Carmelleon" className="main-icon" />
         <h1>Carmelleon</h1>
       </div>
       <nav className="navbar">
@@ -43,7 +43,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, userName, handleLogout }) => {
           <li>
             <Link to="/">
               <div className="icon-container">
-                <img src={`${process.env.PUBLIC_URL}/assets/home_icon.png`} alt="Home" className="icon" />
+                <img src={`${process.env.PUBLIC_URL}/Assets/home_icon.png`} alt="Home" className="icon" />
                 <span>Home</span>
               </div>
             </Link>
@@ -51,7 +51,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, userName, handleLogout }) => {
           <li>
             <Link to="/product">
               <div className="icon-container">
-                <img src={`${process.env.PUBLIC_URL}/assets/product_icon.png`} alt="Product" className="icon" />
+                <img src={`${process.env.PUBLIC_URL}/Assets/product_icon.png`} alt="Product" className="icon" />
                 <span>Product</span>
               </div>
             </Link>
@@ -59,7 +59,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, userName, handleLogout }) => {
           <li>
             <Link to="/about">
               <div className="icon-container">
-                <img src={`${process.env.PUBLIC_URL}/assets/about_icon.png`} alt="About" className="icon" />
+                <img src={`${process.env.PUBLIC_URL}/Assets/about_icon.png`} alt="About" className="icon" />
                 <span>About</span>
               </div>
             </Link>
@@ -67,7 +67,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, userName, handleLogout }) => {
           <li>
             <Link to="/support">
               <div className="icon-container">
-                <img src={`${process.env.PUBLIC_URL}/assets/support_icon.png`} alt="Support" className="icon" />
+                <img src={`${process.env.PUBLIC_URL}/Assets/support_icon.png`} alt="Support" className="icon" />
                 <span>Support</span>
               </div>
             </Link>
@@ -75,7 +75,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, userName, handleLogout }) => {
           <li>
             <Link to="/cart">
               <div className="icon-container">
-                <img src={`${process.env.PUBLIC_URL}/assets/cart_icon.png`} alt="Cart" className="icon" />
+                <img src={`${process.env.PUBLIC_URL}/Assets/cart_icon.png`} alt="Cart" className="icon" />
                 <span>Cart</span>
               </div>
             </Link>
@@ -83,7 +83,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, userName, handleLogout }) => {
           <li>
             <Link to="/orders">
               <div className="icon-container">
-                <img src={`${process.env.PUBLIC_URL}/assets/orders_icon.png`} alt="Orders" className="icon" />
+                <img src={`${process.env.PUBLIC_URL}/Assets/orders_icon.png`} alt="Orders" className="icon" />
                 <span>Orders</span>
               </div>
             </Link>
