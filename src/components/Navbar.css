@@ -27,18 +27,25 @@
 .logo {
   display: flex;
   align-items: center;
-  margin-top: 40px;
+  justify-content: center;
+  margin-top: 60px; /* Increased from 40px */
+  width: 100%;
+  position: relative;
 }
 
 .logo h1 {
-  margin-left: 10px;
   font-size: 2rem;
   color: #333;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .main-icon {
   width: 60px;
   height: 60px;
+  position: absolute;
+  right: calc(50% + 100px); /* Adjust this value based on the text width */
 }
 
 .navbar {
@@ -46,6 +53,8 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin-top: 40px; /* Increased from 20px */
+  padding-bottom: 20px; /* Added to increase space between icons and page divider */
 }
 
 .nav-links {
@@ -54,6 +63,9 @@
   gap: 40px;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
 }
 
 .nav-links li {
@@ -86,14 +98,103 @@
 }
 
 .auth-buttons button {
-  background-color: #333;
-  color: white;
-  border: none;
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #333;
   padding: 8px 15px;
   cursor: pointer;
   border-radius: 5px;
 }
 
 .auth-buttons button:hover {
-  background-color: #555;
+  background-color: #e0e0e0;
+}
+
+/* 다크모드 방지 */
+@media (prefers-color-scheme: dark) {
+  .header, .navbar, .nav-links a, .icon, .auth-buttons button {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  .icon {
+    border-color: #666;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 10px;
+  }
+
+  .auth-buttons {
+    position: static;
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  .logo {
+    margin-top: 40px; /* Adjusted for mobile */
+  }
+
+  .logo h1 {
+    font-size: 1.5rem;
+  }
+
+  .main-icon {
+    width: 40px;
+    height: 40px;
+    right: calc(50% + 75px); /* Adjust for smaller text */
+  }
+
+  .nav-links {
+    gap: 20px;
+    justify-content: center;
+    padding: 0 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  }
+
+  .nav-links::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+  }
+
+  .icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .nav-links span {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-links {
+    gap: 15px;
+  }
+
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .nav-links span {
+    font-size: 0.7rem;
+  }
+
+  .logo h1 {
+    font-size: 1.2rem;
+  }
+
+  .main-icon {
+    width: 30px;
+    height: 30px;
+    right: calc(50% + 60px); /* Adjust for even smaller text */
+  }
 }

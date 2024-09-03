@@ -1,30 +1,34 @@
 // src/pages/Settings.js
-import React from 'react';
-import './Settings.css'; // CSS 파일을 만들어 스타일을 적용하세요
+import React, { useState } from 'react';
+import './Settings.css';
 
-const Settings = () => {
+const Settings = ({ userInfo, handleDeleteAccount }) => {
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const onDeleteAccount = async () => {
+    if (window.confirm('정말로 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.')) {
+      setIsDeleting(true);
+      await handleDeleteAccount();
+      setIsDeleting(false);
+    }
+  };
+
+  if (!userInfo) {
+    return <div>로딩 중...</div>;
+  }
+
   return (
     <div className="settings-container">
-      <h2>Account Settings</h2>
-      <form>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input type="text" id="username" name="username" />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" name="email" />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">New Password</label>
-          <input type="password" id="password" name="password" />
-        </div>
-        <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm New Password</label>
-          <input type="password" id="confirmPassword" name="confirmPassword" />
-        </div>
-        <button type="submit">Save Changes</button>
-      </form>
+      <h1>계정 설정</h1>
+      <div className="user-info">
+        <p><strong>사용자 이름:</strong> {userInfo.name}</p>
+        <p><strong>이메일:</strong> {userInfo.email}</p>
+      </div>
+      <div className="delete-account">
+        <button onClick={onDeleteAccount} disabled={isDeleting}>
+          {isDeleting ? '처리 중...' : '회원 탈퇴'}
+        </button>
+      </div>
     </div>
   );
 };

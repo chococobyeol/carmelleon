@@ -20,9 +20,12 @@ console.log('SESSION_SECRET:', process.env.SESSION_SECRET);
 
 // CORS 설정
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3002'],
+  origin: process.env.REACT_APP_FRONTEND_URL,
   credentials: true,
 }));
+
+// JSON 파싱 미들웨어
+app.use(express.json());
 
 // 세션 설정
 app.use(session({
@@ -75,6 +78,53 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
+// 사용자 생성 API
+app.post('/api/users', async (req, res) => {
+  try {
+    const { googleId, email, name } = req.body;
+
+    // 이미 존재하는 사용자인지 확인
+    const existingUser = await User.findOne({ where: { googleId } });
+    if (existingUser) {
+      return res.status(400).json({ message: '이미 등록된 사용자입니다.' });
+    }
+
+    // 새 사용자 생성
+    const newUser = await User.create({
+      googleId,
+      email,
+      username: name,
+    });
+
+    res.status(201).json({ message: '회원가입이 완료되었습니다.', userId: newUser.id });
+  } catch (error) {
+    console.error('사용자 생성 중 오류 발생:', error);
+    res.status(500).json({ message: '서버 오류가 발생했습니다. 나중에 다시 시도해주세요.' });
+  }
+});
+
+// 사용자 삭제 API
+app.delete('/api/user', async (req, res) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) {
+    return res.status(401).json({ message: 'No token provided' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findOne({ where: { id: decoded.id } });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    await user.destroy();
+    res.json({ message: 'User successfully deleted' });
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 // 에러 핸들링 미들웨어
 app.use((err, req, res, next) => {
   console.error(err.stack);
@@ -82,9 +132,11 @@ app.use((err, req, res, next) => {
 });
 
 // 데이터베이스 연결 및 서버 시작
+const PORT = process.env.PORT || 3001;
+
 db.sync().then(() => {
-  app.listen(3001, () => {
-    console.log('Server is running on http://localhost:3001');
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
   });
 }).catch(err => {
   console.error('데이터베이스 연결에 실패했습니다:', err);

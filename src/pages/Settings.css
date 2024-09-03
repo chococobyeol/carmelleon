@@ -5,38 +5,41 @@
     padding: 20px;
   }
   
-  .settings-container h2 {
+  .settings-container h1 {
     text-align: center;
     margin-bottom: 20px;
   }
   
-  .form-group {
-    margin-bottom: 15px;
+  .user-info {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
   }
   
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
+  .user-info p {
+    margin: 10px 0;
   }
   
-  .form-group input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  .delete-account {
+    text-align: center;
   }
   
-  button[type="submit"] {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
+  .delete-account button {
+    background-color: #ff4d4d;
     color: white;
     border: none;
-    border-radius: 4px;
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
   }
   
-  button[type="submit"]:hover {
-    background-color: #0056b3;
+  .delete-account button:hover {
+    background-color: #ff3333;
+  }
+  
+  .delete-account button:disabled {
+    background-color: #ffb3b3;
+    cursor: not-allowed;
   }

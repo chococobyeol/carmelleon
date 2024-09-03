@@ -8,7 +8,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, userName, handleLogout }) => {
 
   const handleLogin = () => {
     console.log("Login button clicked");
-    window.location.href = "http://localhost:3001/auth/google?mode=login";
+    window.location.href = `${process.env.REACT_APP_API_URL}/auth/google?mode=login`;
   };
 
   const handleSignUp = () => {

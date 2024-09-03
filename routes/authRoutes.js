@@ -6,29 +6,18 @@ const User = require('../models/User');
 
 const router = express.Router();
 
-router.get('/google', (req, res, next) => {
-  const mode = req.query.mode;
-  const state = mode ? Buffer.from(JSON.stringify({mode})).toString('base64') : undefined;
-  passport.authenticate('google', {
-    scope: ['profile', 'email'],
-    state: state
-  })(req, res, next);
-});
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 router.get('/google/callback', 
-  passport.authenticate('google', { failureRedirect: 'http://localhost:3002/login' }),
-  async (req, res) => {
-    const state = req.query.state ? JSON.parse(Buffer.from(req.query.state, 'base64').toString()) : {};
-    const mode = state.mode;
-
-    if (mode === 'signup' && req.user.isNewUser) {
-      // 새 사용자 등록 로직
-      // 예: 추가 정보 입력 페이지로 리다이렉트
-      res.redirect('http://localhost:3002/complete-signup');
+  passport.authenticate('google', { failureRedirect: `${process.env.REACT_APP_FRONTEND_URL}/login` }),
+  (req, res) => {
+    if (req.user.isNewUser) {
+      // 새 사용자인 경우, 프론트엔드로 정보를 전달
+      return res.redirect(`${process.env.REACT_APP_FRONTEND_URL}?error=no_user&googleId=${req.user.googleId}&email=${req.user.email}&name=${req.user.name}`);
     } else {
-      // 기존 로그인 로직
+      // 기존 사용자인 경우, 로그인 처리
       const token = jwt.sign({ id: req.user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      res.redirect(`http://localhost:3002?token=${token}`);
+      return res.redirect(`${process.env.REACT_APP_FRONTEND_URL}?token=${token}`);
     }
   }
 );
