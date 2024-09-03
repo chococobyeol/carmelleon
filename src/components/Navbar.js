@@ -2,13 +2,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
-import mainIcon from '../assets/main_icon.png';
-import homeIcon from '../assets/home_icon.png';
-import productIcon from '../assets/product_icon.png';
-import aboutIcon from '../assets/about_icon.png';
-import supportIcon from '../assets/support_icon.png';
-import cartIcon from '../assets/cart_icon.png';
-import ordersIcon from '../assets/orders_icon.png';
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn, userName, handleLogout }) => {
   const navigate = useNavigate();
@@ -42,7 +35,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, userName, handleLogout }) => {
         )}
       </div>
       <div className="logo">
-        <img src={mainIcon} alt="Carmelleon" className="main-icon" />
+        <img src={`${process.env.PUBLIC_URL}/assets/main_icon.png`} alt="Carmelleon" className="main-icon" />
         <h1>Carmelleon</h1>
       </div>
       <nav className="navbar">
@@ -50,7 +43,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, userName, handleLogout }) => {
           <li>
             <Link to="/">
               <div className="icon-container">
-                <img src={homeIcon} alt="Home" className="icon" />
+                <img src={`${process.env.PUBLIC_URL}/assets/home_icon.png`} alt="Home" className="icon" />
                 <span>Home</span>
               </div>
             </Link>
@@ -58,7 +51,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, userName, handleLogout }) => {
           <li>
             <Link to="/product">
               <div className="icon-container">
-                <img src={productIcon} alt="Product" className="icon" />
+                <img src={`${process.env.PUBLIC_URL}/assets/product_icon.png`} alt="Product" className="icon" />
                 <span>Product</span>
               </div>
             </Link>
@@ -66,7 +59,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, userName, handleLogout }) => {
           <li>
             <Link to="/about">
               <div className="icon-container">
-                <img src={aboutIcon} alt="About" className="icon" />
+                <img src={`${process.env.PUBLIC_URL}/assets/about_icon.png`} alt="About" className="icon" />
                 <span>About</span>
               </div>
             </Link>
@@ -74,7 +67,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, userName, handleLogout }) => {
           <li>
             <Link to="/support">
               <div className="icon-container">
-                <img src={supportIcon} alt="Support" className="icon" />
+                <img src={`${process.env.PUBLIC_URL}/assets/support_icon.png`} alt="Support" className="icon" />
                 <span>Support</span>
               </div>
             </Link>
@@ -82,7 +75,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, userName, handleLogout }) => {
           <li>
             <Link to="/cart">
               <div className="icon-container">
-                <img src={cartIcon} alt="Cart" className="icon" />
+                <img src={`${process.env.PUBLIC_URL}/assets/cart_icon.png`} alt="Cart" className="icon" />
                 <span>Cart</span>
               </div>
             </Link>
@@ -90,7 +83,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, userName, handleLogout }) => {
           <li>
             <Link to="/orders">
               <div className="icon-container">
-                <img src={ordersIcon} alt="Orders" className="icon" />
+                <img src={`${process.env.PUBLIC_URL}/assets/orders_icon.png`} alt="Orders" className="icon" />
                 <span>Orders</span>
               </div>
             </Link>
