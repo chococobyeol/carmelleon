@@ -5,6 +5,7 @@ const session = require('express-session');
 const passport = require('passport');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const path = require('path'); // 추가: 경로 설정을 위해 필요
 const db = require('./db');
 require('./config/passport');
 const authRoutes = require('./routes/authRoutes');
@@ -47,6 +48,7 @@ app.use(passport.session());
 // Auth Routes 사용
 app.use('/auth', authRoutes);
 
+// API 라우트
 app.get('/', (req, res) => {
   res.send('Home Page');
 });
@@ -89,13 +91,11 @@ app.post('/api/users', async (req, res) => {
   try {
     const { googleId, email, name } = req.body;
 
-    // 이미 존재하는 사용자인지 확인
     const existingUser = await User.findOne({ where: { googleId } });
     if (existingUser) {
       return res.status(400).json({ message: '이미 등록된 사용자입니다.' });
     }
 
-    // 새 사용자 생성
     const newUser = await User.create({
       googleId,
       email,
@@ -129,6 +129,13 @@ app.delete('/api/user', async (req, res) => {
     console.error('Error deleting user:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
+});
+
+// 정적 파일 제공 및 React 라우트 처리
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
 // 에러 핸들링 미들웨어
