@@ -28,13 +28,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 60px; /* Increased from 40px */
+  margin-top: 80px;
   width: 100%;
   position: relative;
 }
 
 .logo h1 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: #333;
   position: absolute;
   left: 50%;
@@ -42,10 +42,10 @@
 }
 
 .main-icon {
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   position: absolute;
-  right: calc(50% + 100px); /* Adjust this value based on the text width */
+  right: calc(50% + 95px);
 }
 
 .navbar {
@@ -53,8 +53,8 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 40px; /* Increased from 20px */
-  padding-bottom: 20px; /* Added to increase space between icons and page divider */
+  margin-top: 60px;
+  padding-bottom: 20px;
 }
 
 .nav-links {
@@ -97,6 +97,10 @@
   background-color: #fff;
 }
 
+.nav-links span {
+  font-size: 0.8rem; /* Reduced from default size */
+}
+
 .auth-buttons button {
   background-color: #f0f0f0;
   color: #333;
@@ -134,17 +138,21 @@
   }
 
   .logo {
-    margin-top: 40px; /* Adjusted for mobile */
+    margin-top: 60px;
   }
 
   .logo h1 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .main-icon {
-    width: 40px;
-    height: 40px;
-    right: calc(50% + 75px); /* Adjust for smaller text */
+    width: 38px;
+    height: 38px;
+    right: calc(50% + 70px);
+  }
+
+  .navbar {
+    margin-top: 50px;
   }
 
   .nav-links {
@@ -155,11 +163,11 @@
     overflow-x: auto;
     width: 100%;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
-  .nav-links::-webkit-scrollbar { /* WebKit */
+  .nav-links::-webkit-scrollbar {
     width: 0;
     height: 0;
   }
@@ -170,7 +178,7 @@
   }
 
   .nav-links span {
-    font-size: 0.8rem;
+    font-size: 0.7rem; /* Further reduced for mobile */
   }
 }
 
@@ -185,16 +193,16 @@
   }
 
   .nav-links span {
-    font-size: 0.7rem;
+    font-size: 0.6rem; /* Even smaller for smallest screens */
   }
 
   .logo h1 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .main-icon {
-    width: 30px;
-    height: 30px;
-    right: calc(50% + 60px); /* Adjust for even smaller text */
+    width: 28px;
+    height: 28px;
+    right: calc(50% + 55px);
   }
 }
