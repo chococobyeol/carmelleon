@@ -49,11 +49,6 @@ app.use(passport.session());
 app.use('/auth', authRoutes);
 
 // API 라우트
-app.get('/', (req, res) => {
-  res.send('Home Page');
-});
-
-// 사용자 정보 가져오기 API
 app.get('/api/user', async (req, res) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) {
@@ -131,9 +126,10 @@ app.delete('/api/user', async (req, res) => {
   }
 });
 
-// 정적 파일 제공 및 React 라우트 처리
+// 정적 파일 제공
 app.use(express.static(path.join(__dirname, 'client/build')));
 
+// React 애플리케이션의 모든 경로 처리
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
