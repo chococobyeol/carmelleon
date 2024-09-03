@@ -31,7 +31,12 @@ app.use(express.json());
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false, // 로그인 시에만 세션 생성
+  cookie: {
+    secure: process.env.NODE_ENV === 'production', // 프로덕션 환경에서는 HTTPS를 사용해야만 쿠키가 전송됨
+    httpOnly: true, // 클라이언트 자바스크립트에서 쿠키 접근 불가
+    maxAge: 1000 * 60 * 60, // 1시간 동안 유효
+  },
 }));
 
 // Passport 초기화
